@@ -8,9 +8,9 @@ part of 'user_model.dart';
 
 UserResponseModel _$UserResponseModelFromJson(Map<String, dynamic> json) =>
     UserResponseModel(
-      name: json['name'] as String,
+      name: json['name'] as String?,
       email: json['email'] as String,
-      password: json['password'] as String,
+      password: json['password'] as String?,
     );
 
 Map<String, dynamic> _$UserResponseModelToJson(UserResponseModel instance) =>

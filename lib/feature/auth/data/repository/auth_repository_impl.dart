@@ -1,22 +1,30 @@
-import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/feature/auth/data/data_sources/auth_remote_data_source.dart';
-import 'package:blog_app/feature/auth/domain/entities/user_entity.dart';
 import 'package:blog_app/feature/auth/domain/repository/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
+import '../../../../core/common/entities/user_entity.dart';
+
+final class AuthRepositoryImpl extends AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
 
-  const AuthRepositoryImpl(this.authRemoteDataSource);
+  AuthRepositoryImpl(this.authRemoteDataSource);
+
+
+  @override
+  Future<Either<Failures, UserEntity>> getCurrentUser() async {
+    return await request(
+      request: () async => await authRemoteDataSource.getCurrentUserData(),
+    );
+  }
 
   @override
   Future<Either<Failures, UserEntity>> loginWithEmailPassword({
     required String email,
     required String password,
   }) async {
-    return await _getUser(
-      fn: () async => await authRemoteDataSource.loginWithEmailPassword(
+    return await request(
+      request: () async => await authRemoteDataSource.loginWithEmailPassword(
         email: email,
         password: password,
       ),
@@ -29,8 +37,8 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    return await _getUser(
-      fn: () async => await authRemoteDataSource.signUpWithEmailPassword(
+    return await request(
+      request: () async => await authRemoteDataSource.signUpWithEmailPassword(
         name: name,
         email: email,
         password: password,
@@ -38,14 +46,4 @@ class AuthRepositoryImpl implements AuthRepository {
     );
   }
 
-  Future<Either<Failures, UserEntity>> _getUser({
-    required Future<UserEntity> Function() fn,
-  }) async {
-    try {
-      final user = await fn();
-      return Right(user);
-    } on ServerException catch (e) {
-      return Left(Failures(500, e.message));
-    }
-  }
 }

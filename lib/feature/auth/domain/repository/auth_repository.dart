@@ -1,9 +1,10 @@
-import 'package:blog_app/feature/auth/domain/entities/user_entity.dart';
+import 'package:blog_app/core/base/repository.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/common/entities/user_entity.dart';
 import '../../../../core/error/failures.dart';
 
-abstract interface class AuthRepository {
+abstract base class AuthRepository extends BaseRepository<UserEntity>{
   Future<Either<Failures, UserEntity>> signUpWithEmailPassword({
     required String name,
     required String email,
@@ -14,4 +15,7 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
   });
+
+  Future<Either<Failures, UserEntity>> getCurrentUser();
 }
+

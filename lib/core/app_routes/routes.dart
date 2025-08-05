@@ -17,5 +17,10 @@ final GoRouter appRouter = GoRouter(
       path: '/', // Use a clean path
       builder: (context, state) => const LoginPage(),
     ),
+    GoRoute(
+      name: RoutesName.homePage,
+      path: '/', // Use a clean path
+      builder: (context, state) => const LoginPage(),
+    ),
   ],
 );
