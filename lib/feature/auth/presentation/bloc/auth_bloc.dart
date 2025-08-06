@@ -29,6 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
        _currentUserUseCase = currentUserUseCase,
        _appUserCubit = appUserCubit,
        super(AuthInitial()) {
+    on<AuthEvent>((event, emit) => emit(AuthLoading()));
     on<AuthSignUpEvent>(_signUpEvent);
     on<AuthLogInEvent>(_logInEvent);
     on<AuthIsUserLoggedInEvent>(_isUserLoggedIn);
@@ -38,7 +39,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignUpEvent event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoading());
     final res = await _userSignUp(
       UserEntity(
         name: event.name,
@@ -46,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       ),
     );
-     res.fold(
+    res.fold(
       (failure) => emit(AuthFailure(failure.message)),
       (user) => _emitAuthSuccess(user, emit),
     );
@@ -56,11 +56,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthLogInEvent event,
     Emitter<AuthState> emit,
   ) async {
-     emit(AuthLoading());
     final res = await _userLogin(
       UserEntity(email: event.email, password: event.password),
     );
-     res.fold(
+    res.fold(
       (failure) => emit(AuthFailure(failure.message)),
       (user) => _emitAuthSuccess(user, emit),
     );
@@ -71,12 +70,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     final res = await _currentUserUseCase(NoParams());
-    res.fold((l) => emit(AuthFailure(l.message)), (r) => _emitAuthSuccess(r, emit),);
+    res.fold(
+      (l) => emit(AuthFailure(l.message)),
+      (r) => _emitAuthSuccess(r, emit),
+    );
   }
 
-  void _emitAuthSuccess(UserEntity user, Emitter<AuthState> emit){
+  void _emitAuthSuccess(UserEntity user, Emitter<AuthState> emit) {
+    print("Hiiiiiiiiiiiiiiiiiiiiiii ${user.email}");
     _appUserCubit.updateUser(user);
     emit(AuthSuccess(user));
+    print(
+      "_appUserCubit_appUserCubit_appUserCubit_appUserCubit_appUserCubit ${_appUserCubit.state is AppUserLoggedIn}",
+    );
   }
-
 }

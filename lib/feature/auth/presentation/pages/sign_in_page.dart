@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/common/cubits/app_user/app_user_cubit.dart';
 import '../../../../core/common/widgets/loader.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/utils/show_snackbar.dart';
@@ -31,6 +32,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    // final userState = context.read<AppUserCubit>().state;
+    // print("userState is AppUserLoggedIn ${userState is AppUserLoggedIn}");
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15.0),
