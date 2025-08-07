@@ -17,11 +17,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 4), () {
       if (mounted) {
         final userState = context.read<AppUserCubit>().state;
-        print("userStateuserStateuserStateuserStateuserStateuserStateuserState ${userState is AppUserLoggedIn}");
-        if (userState is AppUserLoggedIn) {
+         if (userState is AppUserLoggedIn) {
           context.go(RoutesName.blogPage);
         } else {
           context.go(RoutesName.loginPage);
