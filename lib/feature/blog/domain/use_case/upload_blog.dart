@@ -14,6 +14,8 @@ class UploadBlog implements UseCase<UploadBlogParams, BlogEntity> {
 
   @override
   Future<Either<Failures, BlogEntity>> call(request) async {
+    print("vrequestrequestrequestrequestrequestrequestrequestvv ${request.title}");
+    print("vrequestrequestrequestrequestrequestrequestrequestvv ${request.content}");
     return await blogRepository.uploadBlog(
       images: request.image,
       title: request.title,

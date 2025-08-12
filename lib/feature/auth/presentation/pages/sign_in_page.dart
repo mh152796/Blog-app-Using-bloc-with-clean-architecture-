@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      context.pushNamed(RoutesName.signUpPage);
+                      context.go(RoutesName.signUpPage);
                     },
                     child: RichText(
                       text: TextSpan(

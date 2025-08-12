@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/common/entities/user_entity.dart';
 import '../../../../core/error/failures.dart';
 
-abstract base class AuthRepository extends BaseRepository<UserEntity>{
+abstract base class AuthRepository extends BaseRepository{
   Future<Either<Failures, UserEntity>> signUpWithEmailPassword({
     required String name,
     required String email,

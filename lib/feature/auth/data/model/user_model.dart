@@ -10,6 +10,7 @@ class UserResponseModel extends UserEntity {
     required super.name,
     required super.email,
     super.password,
+    super.id,
   });
 
   factory UserResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -18,11 +19,13 @@ class UserResponseModel extends UserEntity {
   UserResponseModel copyWith({
     String? name,
     String? email,
+    String? id,
     String? password,
   }) {
     return UserResponseModel(
       name: name ?? this.name,
       email: email ?? this.email,
+      id: id ?? this.id,
       password: password ?? this.password,
     );
   }

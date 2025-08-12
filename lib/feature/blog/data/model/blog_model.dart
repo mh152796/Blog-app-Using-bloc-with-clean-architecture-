@@ -27,6 +27,9 @@ class BlogModel extends BlogEntity {
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
 
+  @JsonKey(name: 'name')
+  final String? posterName;
+
   BlogModel({
     required this.id,
     required this.posterId,
@@ -35,7 +38,8 @@ class BlogModel extends BlogEntity {
     required this.imageUrl,
     required this.topics,
     required this.updatedAt,
-  }) : super(id, posterId, title, content, imageUrl, topics, updatedAt);
+     this.posterName,
+  }) : super(id, posterId, title, content, imageUrl, topics, updatedAt, posterName);
 
   factory BlogModel.fromJson(Map<String, dynamic> json) {
     json['updated_at'] ??= DateTime.now().toIso8601String();
@@ -52,6 +56,7 @@ class BlogModel extends BlogEntity {
     String? imageUrl,
     List<String>? topics,
     DateTime? updatedAt,
+    String? posterName,
   }) {
 
     return BlogModel(
@@ -62,6 +67,7 @@ class BlogModel extends BlogEntity {
       imageUrl: imageUrl ?? this.imageUrl,
       topics: topics ?? this.topics,
       updatedAt: updatedAt ?? this.updatedAt,
+      posterName: posterName ?? this.posterName,
     );
   }
 }

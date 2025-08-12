@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
 
-abstract class BaseRepository<T> {
-  Future<Either<Failures, T>> request({
+abstract class BaseRepository{
+  Future<Either<Failures, T>> request<T>({
     required Future<T> Function() request,
   }) async {
     try {

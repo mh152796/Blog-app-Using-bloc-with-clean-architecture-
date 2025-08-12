@@ -4,6 +4,7 @@ class BlogEntity {
   final String title;
   final String content;
   final String imageUrl;
+  final String? posterName;
   final List<String> topics;
   final DateTime updatedAt;
 
@@ -15,5 +16,6 @@ class BlogEntity {
     this.imageUrl,
     this.topics,
     this.updatedAt,
+      this.posterName
   );
 }

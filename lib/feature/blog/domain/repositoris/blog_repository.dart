@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/base/repository.dart';
 import '../../../../core/error/failures.dart';
 
-abstract base class BlogRepository extends BaseRepository<BlogEntity>{
+abstract base class BlogRepository extends BaseRepository{
   Future<Either<Failures, BlogEntity>> uploadBlog({
     required File images,
     required String title,
@@ -14,4 +14,6 @@ abstract base class BlogRepository extends BaseRepository<BlogEntity>{
     required String posterId,
     required List<String> topics,
   });
+
+  Future<Either<Failures, List<BlogEntity>>> getAllBlogs();
 }

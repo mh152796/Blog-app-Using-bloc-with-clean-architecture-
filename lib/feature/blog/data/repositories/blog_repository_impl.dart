@@ -31,7 +31,7 @@ final class BlogRepositoryImpl extends BlogRepository {
       updatedAt: DateTime.now(),
     );
 
-    return await request(
+    return await request<BlogModel>(
       request: () async {
         final res = await blogRemoteDataSource.uploadBlogImage(
           file: images,
@@ -40,6 +40,13 @@ final class BlogRepositoryImpl extends BlogRepository {
         final blog = blogModel.copyWith(imageUrl: res);
         return await blogRemoteDataSource.uploadBlog(blog);
       },
+    );
+  }
+
+  @override
+  Future<Either<Failures, List<BlogEntity>>> getAllBlogs() async {
+    return await request<List<BlogEntity>>(
+      request: () async => await blogRemoteDataSource.getAllBlogs(),
     );
   }
 }

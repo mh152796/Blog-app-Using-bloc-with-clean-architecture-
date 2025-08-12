@@ -12,3 +12,5 @@ final class BlogUploadEvent extends BlogEvent {
 
   BlogUploadEvent(this.posterId, this.title, this.content, this.image, this.topics);
 }
+
+final class BlogFetchAllBlogs extends BlogEvent{}
