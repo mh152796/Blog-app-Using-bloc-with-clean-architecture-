@@ -3,5 +3,6 @@ class RoutesName{
   static String loginPage = '/login_page';
    static String blogPage = '/blog_page';
    static String addNewBlogPage = '/add_new_blog_page';
+   static String blogViewerPage = '/blog_viewer_page';
   static String splashScreen = '/';
 }

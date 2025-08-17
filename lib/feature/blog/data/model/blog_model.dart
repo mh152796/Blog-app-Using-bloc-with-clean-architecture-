@@ -27,7 +27,7 @@ class BlogModel extends BlogEntity {
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
 
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', includeFromJson: true, includeToJson: false)
   final String? posterName;
 
   BlogModel({

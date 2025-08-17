@@ -16,6 +16,6 @@ class BlogEntity {
     this.imageUrl,
     this.topics,
     this.updatedAt,
-      this.posterName
+    this.posterName,
   );
 }

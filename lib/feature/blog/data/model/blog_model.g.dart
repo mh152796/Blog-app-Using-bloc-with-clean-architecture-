@@ -25,5 +25,4 @@ Map<String, dynamic> _$BlogModelToJson(BlogModel instance) => <String, dynamic>{
   'image_url': instance.imageUrl,
   'topics': instance.topics,
   'updated_at': instance.updatedAt.toIso8601String(),
-  'name': instance.posterName,
 };

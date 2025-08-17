@@ -1,4 +1,6 @@
 import 'package:blog_app/core/app_routes/route_name.dart';
+import 'package:blog_app/feature/blog/domain/entities/blog_entity.dart';
+import 'package:blog_app/feature/blog/presentation/pages/blog_viewer_page.dart';
 import 'package:blog_app/feature/splash/presentation/pages/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 import '../../feature/auth/presentation/pages/sign_in_page.dart';
@@ -28,6 +30,13 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: RoutesName.addNewBlogPage,
       builder: (context, state) => const AddNewBlogPage(),
+    ),
+    GoRoute(
+      path: RoutesName.blogViewerPage,
+      builder: (context, state) {
+        final blog = state.extra as BlogEntity; // cast to your model
+        return BlogViewerPage(blog: blog);
+      },
     ),
   ],
 );
